@@ -5,14 +5,14 @@ import { TagsList } from "./components/TagsList/TagsList";
 import { useTranslation } from "react-i18next";
 
 function App() {
-  // const { t, i18n } = useTranslation();
-  // const changeLanguage = (language: string) => {
-  //   i18n.changeLanguage(language);
-  // };
+  const { t, i18n } = useTranslation();
+  const changeLanguage = (language: string) => {
+    i18n.changeLanguage(language);
+  };
 
   return (
     <div className="App">
-      <Header></Header>
+      <Header changeLanguage={changeLanguage} t={t}></Header>
       <main className="main">
         <section className="container">
           <Form></Form>
