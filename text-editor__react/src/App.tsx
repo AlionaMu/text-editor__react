@@ -1,26 +1,29 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import { CardsList } from "./components/CardsList/CardsList";
+import { Form } from "./components/Form/Form";
+import { Header } from "./components/Header/Header";
+import { TagsList } from "./components/TagsList/TagsList";
+import { useTranslation } from "react-i18next";
 
 function App() {
+  // const { t, i18n } = useTranslation();
+  // const changeLanguage = (language: string) => {
+  //   i18n.changeLanguage(language);
+  // };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header></Header>
+      <main className="main">
+        <section className="container">
+          <Form></Form>
+          <TagsList></TagsList>
+        </section>
+        <CardsList></CardsList>
+      </main>
     </div>
   );
 }
 
 export default App;
+
+// <Header changeLanguage={changeLanguage} t={t}></Header>
