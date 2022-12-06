@@ -1,7 +1,9 @@
-@import '../../assets/colors.scss';
+@import "../../assets/colors.scss";
 
 .header {
   padding: 20px 30px;
   box-shadow: 0 0 20px 0 rgb(0 0 0 / 10%);
   background-color: $bg-color;
+  display: flex;
+  justify-content: space-around;
 }

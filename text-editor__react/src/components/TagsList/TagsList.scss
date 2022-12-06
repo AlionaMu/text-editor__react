@@ -1,0 +1,11 @@
+@import "../../assets//colors.scss";
+
+.tags-list {
+  display: flex;
+  width: 300px;
+  justify-content: space-around;
+  padding: 20px;
+  margin: 10px 5px;
+  border-radius: 9px;
+  background-color: $bg-color;
+}

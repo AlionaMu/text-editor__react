@@ -1,4 +1,29 @@
-.form__button {
-  height: 30px;
-  width: 150px;
+@import "../../assets/colors.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  width: 300px;
+  justify-content: space-around;
+  padding: 20px;
+  margin: 10px 5px;
+  border-radius: 9px;
+  background-color: $bg-color;
+
+  &__button {
+    height: 30px;
+    width: 100px;
+  }
+
+  &__input {
+    height: 30px;
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+  }
+
+  &__error {
+    color: red;
+  }
 }

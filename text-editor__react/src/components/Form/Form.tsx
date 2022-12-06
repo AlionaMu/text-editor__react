@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import "./Form.scss";
-// import { AppContext } from '../context';
+import { TagService } from "../../services/TagService";
 
 import { HashService } from "../../services/HashService";
+import { FormPropsType } from "../../types";
 
 export interface FormInfo {
   note: string;
@@ -13,8 +14,7 @@ export const defaultValues: FormInfo = {
   note: "",
 };
 
-export const Form = () => {
-  // const { dispatch } = useContext(AppContext);
+export const Form = (props: FormPropsType) => {
   const [disabled, setDisabled] = useState(true);
   const {
     register,
@@ -24,17 +24,11 @@ export const Form = () => {
     defaultValues,
   });
 
-  const createFormCard = (newCard: FormInfo) => {
-    /* dispatch({
-     // type: Types.Create,
-     payload: newCard
-   });*/
-    const hashes = HashService.findByHash(newCard.note);
-    console.log(hashes);
-  };
-
   const onSubmit: SubmitHandler<FormInfo> = (data) => {
-    createFormCard(data);
+    const tags = HashService.findByHash(data.note);
+    TagService.setNewTagToStorage(tags);
+    const newTags = TagService.getAllTags();
+    props.setTagsList(newTags);
   };
 
   const setButtonAble = () => {
@@ -46,28 +40,26 @@ export const Form = () => {
       onSubmit={handleSubmit(onSubmit)}
       onChange={setButtonAble}
     >
-      <label>
-        New Note:
-        <input
-          type="text"
-          {...register("note", {
-            required: true,
-            minLength: {
-              value: 3,
-              message: "This input must exceed 3 characters",
-            },
-          })}
-          className="form__input"
-          placeholder="Enter text"
-        />
-        <p className="form__error">{errors.note && "First name is required"}</p>
-        <p className="form__error">{errors.note?.message}</p>
-      </label>
+      <label>{props.t("form.title")}:</label>
+      <input
+        type="text"
+        {...register("note", {
+          required: true,
+          minLength: {
+            value: 3,
+            message: "This input must exceed 3 characters",
+          },
+        })}
+        className="form__input"
+        placeholder="Enter text"
+      />
+      <p className="form__error">{errors.note && props.t("form.error")}</p>
+      <p className="form__error">{errors.note?.message}</p>
       <input
         type="submit"
-        value="Submit"
         className="button form__button"
         disabled={disabled}
+        value={props.t("form.button").toString()}
       ></input>
     </form>
   );
