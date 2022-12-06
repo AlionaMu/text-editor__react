@@ -18,12 +18,19 @@ export type LocalType = {
 export type FormPropsType = {
   t: TFunction<"translation", undefined>;
   setTagsList: Dispatch<any>;
+  setNotesList: Dispatch<any>;
+};
+
+export type CardPropsType = {
+  note: Note;
+  key: string;
 };
 
 export type Note = {
   id: string;
+  key: string;
   text: string;
-  tags: Tag[];
+  tags: string[];
 };
 
 export type Tag = {

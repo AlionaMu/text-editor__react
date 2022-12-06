@@ -1,0 +1,21 @@
+.note-card {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  width: 300px;
+  justify-content: space-around;
+  padding: 20px;
+  margin: 10px 5px;
+  border-radius: 9px;
+  background-color: #e5e5e5;
+
+  &__title {
+    word-break: break-word;
+  }
+
+  &__tag {
+    height: 8px;
+    margin: 5px;
+    font-size: 10px;
+  }
+}

@@ -5,6 +5,7 @@ import TagsList from "./components/TagsList/TagsList";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { TagService } from "./services/TagService";
+import { NoteService } from "./services/NoteService";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -15,16 +16,22 @@ function App() {
 
   const list = TagService.getAllTags();
   const [tagsList, setTagsList] = useState(list);
+  const notesStorageList = NoteService.getNotes();
+  const [notesList, setNotesList] = useState(notesStorageList);
 
   return (
     <div className="App">
       <Header changeLanguage={changeLanguage} t={t}></Header>
       <main className="main">
         <section className="container">
-          <Form t={t} setTagsList={setTagsList}></Form>
+          <Form
+            t={t}
+            setTagsList={setTagsList}
+            setNotesList={setNotesList}
+          ></Form>
           <TagsList items={tagsList} setTagsList={setTagsList}></TagsList>
         </section>
-        <CardsList></CardsList>
+        <CardsList items={notesList}></CardsList>
       </main>
     </div>
   );

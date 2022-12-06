@@ -5,6 +5,7 @@ import { TagService } from "../../services/TagService";
 
 import { HashService } from "../../services/HashService";
 import { FormPropsType } from "../../types";
+import { NoteService } from "../../services/NoteService";
 
 export interface FormInfo {
   note: string;
@@ -27,8 +28,10 @@ export const Form = (props: FormPropsType) => {
   const onSubmit: SubmitHandler<FormInfo> = (data) => {
     const tags = HashService.findByHash(data.note);
     TagService.setNewTagToStorage(tags);
-    const newTags = TagService.getAllTags();
-    props.setTagsList(newTags);
+    const commonTags = TagService.getAllTags();
+    props.setTagsList(commonTags);
+
+    NoteService.setNotes(data.note, tags);
   };
 
   const setButtonAble = () => {

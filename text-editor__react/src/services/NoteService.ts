@@ -8,10 +8,11 @@ export const NoteService = {
     return storage ? JSON.parse(storage) : notes;
   },
 
-  setNotes(text: string, tags: Tag[]): void {
+  setNotes(text: string, tags: string[]): void {
     const data = this.getNotes();
     const newNote: Note = {
-      id: data.length.toString(),
+      id: text.length.toString(),
+      key: Date.now() + Math.random.toString(),
       text: text,
       tags: tags,
     };
@@ -19,7 +20,6 @@ export const NoteService = {
     localStorage.setItem("notes", JSON.stringify(data));
   },
 };
-//this.data$.next(this.get());
 
 /*public editNote(text: string, id: string)  {
   const data = this.get();
