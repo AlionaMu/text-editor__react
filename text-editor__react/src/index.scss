@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 @import "../src/assets/colors.scss";
+@import "../src/assets/mixins.scss";
 
 * {
   box-sizing: border-box;
@@ -65,4 +66,17 @@ body {
   height: calc(100vh - 100px);
   display: flex;
   justify-content: space-around;
+
+  @include smart {
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 350px;
 }

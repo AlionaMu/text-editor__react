@@ -1,9 +1,14 @@
 import { t, TFunction } from "i18next";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch } from "react";
 
 export enum LangEnum {
   en = "EN",
   ru = "RU",
+}
+
+export enum ETypeListMode {
+  common = "COMMON",
+  card = "CARD",
 }
 
 export type TType = {
@@ -24,6 +29,7 @@ export type FormPropsType = {
 export type CardPropsType = {
   note: Note;
   key: string;
+  setNotesList: Dispatch<any>;
 };
 
 export type Note = {
@@ -35,4 +41,18 @@ export type Note = {
 
 export type Tag = {
   tag: string;
+};
+
+export type TagsListPropsType = {
+  items: string[];
+  setTagsList: Dispatch<any>;
+};
+
+export type CardTagsListPropsType = {
+  items: string[];
+};
+
+export type CardsListPropsType = {
+  items: string[];
+  setNotesList: Dispatch<any>;
 };

@@ -1,14 +1,8 @@
 @import "../../assets//colors.scss";
 
-.tags-list__title {
-  font-weight: 800;
-  align-self: flex-start;
-  padding-left: 24px;
-}
-
-.tags-list {
+.tags-list_card {
+  width: auto;
   display: flex;
-  width: 300px;
   justify-content: space-around;
   padding: 20px;
   margin: 10px 5px;
@@ -16,8 +10,4 @@
   background-color: $bg-color;
   flex-wrap: wrap;
   list-style: none;
-}
-
-.tags-list_common {
-  width: 300px;
 }

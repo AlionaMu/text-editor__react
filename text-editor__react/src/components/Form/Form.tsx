@@ -32,6 +32,8 @@ export const Form = (props: FormPropsType) => {
     props.setTagsList(commonTags);
 
     NoteService.setNotes(data.note, tags);
+    const allNotes = NoteService.getNotes();
+    props.setNotesList(allNotes);
   };
 
   const setButtonAble = () => {

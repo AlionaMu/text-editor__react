@@ -3,7 +3,6 @@ export const HashService = {
     const tagsArr: string[] = [];
     const regexp = new RegExp("#([^\\s]*)", "g");
     const tmplist = text.match(regexp);
-    console.log(tmplist);
     tmplist?.forEach((item, i) => {
       const hashSub = tmplist[i].split("#");
       hashSub.forEach((hashItem) => {
@@ -17,7 +16,6 @@ export const HashService = {
         }
       });
     });
-    console.log(tagsArr);
     return tagsArr;
   },
 };

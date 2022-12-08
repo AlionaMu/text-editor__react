@@ -1,7 +1,8 @@
+@import "../../assets/colors.scss";
+
 .note-card {
   display: flex;
   flex-direction: column;
-  height: 200px;
   width: 300px;
   justify-content: space-around;
   padding: 20px;
@@ -11,11 +12,23 @@
 
   &__title {
     word-break: break-word;
+    font-weight: 600;
   }
 
   &__tag {
     height: 8px;
     margin: 5px;
     font-size: 10px;
+  }
+
+  &__button {
+    width: 90px;
+    height: 25px;
+    background-color: $button-color;
+  }
+
+  &__button-container {
+    display: flex;
+    justify-content: space-around;
   }
 }

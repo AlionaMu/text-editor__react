@@ -31,7 +31,7 @@ function App() {
           ></Form>
           <TagsList items={tagsList} setTagsList={setTagsList}></TagsList>
         </section>
-        <CardsList items={notesList}></CardsList>
+        <CardsList items={notesList} setNotesList={setNotesList}></CardsList>
       </main>
     </div>
   );
