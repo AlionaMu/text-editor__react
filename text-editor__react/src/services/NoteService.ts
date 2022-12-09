@@ -1,4 +1,4 @@
-import { Note, Tag } from "../types";
+import { Note } from "../types";
 import { HashService } from "./HashService";
 import { TagService } from "./TagService";
 
@@ -41,6 +41,5 @@ export const NoteService = {
     const res = data.filter((item: { id: string }) => item.id !== id);
     localStorage.setItem("notes", "");
     localStorage.setItem("notes", JSON.stringify(res));
-    //this.data$.next(this.get());
   },
 };

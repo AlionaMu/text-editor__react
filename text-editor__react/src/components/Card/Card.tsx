@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { Highlight } from "@material-ui/icons";
+import { FormEvent, useCallback, useState } from "react";
 import { NoteService } from "../../services/NoteService";
-import { CardPropsType, ETypeListMode, Note } from "../../types";
+import { CardPropsType } from "../../types";
 import CardTagsList from "../CardTagsList/CardTagsList";
+import { Input } from "../HighlightInput/HighlightInput";
 import "./Card.scss";
 
 export enum Ebutton {
@@ -26,19 +28,30 @@ export const Card = (props: CardPropsType) => {
   };
 
   const deleteNote = () => {
-    console.log("CLICK");
     NoteService.deleteNote(props.note.id);
     const allNotes = NoteService.getNotes();
     props.setNotesList(allNotes);
   };
 
+  const onChangeHandler = (e: FormEvent<HTMLDivElement>) => {
+    // setInputValue(e.target.value);
+    // {light(inputValue)})}
+    console.log("e", e, "e.target", e.target);
+  };
+
+  // const value: any = inputValue
+  //   ? inputValue.split(" ").map((s: string) => {
+  //       s.split("")[0] === "#" ? <span className="highlight">{s}</span> : s;
+  //     })
+  //   : "";
+
+  // const Component = TitleComponent as React.ElementType;
   return (
     <div className="note-card">
       {!isEditMode ? (
         <div className="note-card__title">{inputValue}</div>
       ) : (
         <input
-          type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
@@ -58,3 +71,9 @@ export const Card = (props: CardPropsType) => {
     </div>
   );
 };
+
+{
+  /* <div contentEditable="true" onChange={(e) => onChangeHandler(e)}>
+{light(inputValue)}
+</div> */
+}

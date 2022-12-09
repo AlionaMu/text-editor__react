@@ -18,6 +18,7 @@ function App() {
   const [tagsList, setTagsList] = useState(list);
   const notesStorageList = NoteService.getNotes();
   const [notesList, setNotesList] = useState(notesStorageList);
+  const [filter, setFilter] = useState("");
 
   return (
     <div className="App">
@@ -29,9 +30,17 @@ function App() {
             setTagsList={setTagsList}
             setNotesList={setNotesList}
           ></Form>
-          <TagsList items={tagsList} setTagsList={setTagsList}></TagsList>
+          <TagsList
+            items={tagsList}
+            setTagsList={setTagsList}
+            setFilter={setFilter}
+          ></TagsList>
         </section>
-        <CardsList items={notesList} setNotesList={setNotesList}></CardsList>
+        <CardsList
+          items={notesList}
+          setNotesList={setNotesList}
+          filter={filter}
+        ></CardsList>
       </main>
     </div>
   );

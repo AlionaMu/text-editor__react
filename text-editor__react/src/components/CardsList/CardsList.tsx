@@ -1,13 +1,17 @@
 import { CardsListPropsType, Note } from "../../types";
 import "./CardsList";
 import { Card } from "../Card/Card";
-import { Dispatch, SetStateAction } from "react";
 
-export const CardsList = (props: any) => {
+export const CardsList = (props: CardsListPropsType) => {
+  const res = props.filter.length
+    ? props.items.filter((item: Note) =>
+        item.tags.includes(props.filter) ? item : 0
+      )
+    : props.items;
   return (
     <section className="cards-list">
-      {props.items ? (
-        props.items.map((note: Note) => {
+      {res ? (
+        res.map((note: Note) => {
           return (
             <Card
               note={note}

@@ -1,13 +1,8 @@
 import "./TagsList.scss";
 import { styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
-import Paper from "@mui/material/Paper";
 import { TagsListPropsType } from "../../types";
-
-interface Tag {
-  key: number;
-  tag: string;
-}
+import { TagService } from "../../services/TagService";
 
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
@@ -18,6 +13,11 @@ export default function TagsList(props: TagsListPropsType) {
     props.setTagsList((tagsList: string[]) =>
       tagsList.filter((item: string) => item !== tagToDelete)
     );
+    TagService.deleteTagFromStorage(tagToDelete);
+  };
+
+  const clickHandler = (data: string) => {
+    props.setFilter(data);
   };
 
   return (
@@ -30,7 +30,12 @@ export default function TagsList(props: TagsListPropsType) {
 
             return (
               <ListItem key={(Date.now() + Math.random()).toString()}>
-                <Chip icon={icon} label={data} onDelete={handleDelete(data)} />
+                <Chip
+                  icon={icon}
+                  label={data}
+                  onDelete={handleDelete(data)}
+                  onClick={() => clickHandler(data)}
+                />
               </ListItem>
             );
           })
@@ -40,22 +45,4 @@ export default function TagsList(props: TagsListPropsType) {
       </ul>
     </div>
   );
-}
-
-{
-  /* <Paper
-sx={{
-  bgcolor: "#e5e5e5",
-  display: "flex",
-  justifyContent: "center",
-  flexWrap: "wrap",
-  listStyle: "none",
-  p: 0.5,
-  m: 0,
-}}
-component="ul"
->
-{" "} 
-
-    </Paper>*/
 }

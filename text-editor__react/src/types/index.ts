@@ -1,5 +1,5 @@
 import { t, TFunction } from "i18next";
-import { Dispatch } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 export enum LangEnum {
   en = "EN",
@@ -46,6 +46,7 @@ export type Tag = {
 export type TagsListPropsType = {
   items: string[];
   setTagsList: Dispatch<any>;
+  setFilter: Dispatch<any>;
 };
 
 export type CardTagsListPropsType = {
@@ -53,6 +54,7 @@ export type CardTagsListPropsType = {
 };
 
 export type CardsListPropsType = {
-  items: string[];
-  setNotesList: Dispatch<any>;
+  items: Note[];
+  setNotesList: Dispatch<SetStateAction<Note[]>>;
+  filter: string;
 };
