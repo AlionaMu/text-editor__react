@@ -20,6 +20,10 @@ export default function TagsList(props: TagsListPropsType) {
     props.setFilter(data);
   };
 
+  const resetFilter = () => {
+    props.setFilter("");
+  };
+
   return (
     <div className="tags-list__wrapper">
       <p className="tags-list__title">Tags: </p>
@@ -43,6 +47,9 @@ export default function TagsList(props: TagsListPropsType) {
           <div>no tags</div>
         )}
       </ul>
+      <button className="button tags-list__button" onClick={resetFilter}>
+        reset filtering by tag
+      </button>
     </div>
   );
 }
