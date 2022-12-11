@@ -1,6 +1,8 @@
 import { Highlight } from "@material-ui/icons";
 import { FormEvent, useCallback, useState } from "react";
+import { HashService } from "../../services/HashService";
 import { NoteService } from "../../services/NoteService";
+import { TagService } from "../../services/TagService";
 import { CardPropsType } from "../../types";
 import CardTagsList from "../CardTagsList/CardTagsList";
 import { Input } from "../HighlightInput/HighlightInput";
@@ -21,6 +23,11 @@ export const Card = (props: CardPropsType) => {
     if (button === Ebutton.Edit) {
       setButton(Ebutton.Save);
     } else {
+      const tags = HashService.findByHash(inputValue);
+      TagService.setNewTagToStorage(tags);
+      const commonTags = TagService.getAllTags();
+      props.setTagsList(commonTags);
+
       NoteService.editNote(inputValue, id);
       setButton(Ebutton.Edit);
       setEditMode(false);

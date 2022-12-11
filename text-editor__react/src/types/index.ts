@@ -22,7 +22,7 @@ export type LocalType = {
 
 export type FormPropsType = {
   t: TFunction<"translation", undefined>;
-  setTagsList: Dispatch<any>;
+  setTagsList: Dispatch<SetStateAction<string[]>>;
   setNotesList: Dispatch<any>;
 };
 
@@ -30,6 +30,7 @@ export type CardPropsType = {
   note: Note;
   key: string;
   setNotesList: Dispatch<any>;
+  setTagsList: Dispatch<SetStateAction<string[]>>;
   t: TFunction<"translation", undefined>;
 };
 
@@ -46,7 +47,7 @@ export type Tag = {
 
 export type TagsListPropsType = {
   items: string[];
-  setTagsList: Dispatch<any>;
+  setTagsList: Dispatch<SetStateAction<string[]>>;
   setFilter: Dispatch<any>;
   t: TFunction<"translation", undefined>;
 };
@@ -58,6 +59,7 @@ export type CardTagsListPropsType = {
 export type CardsListPropsType = {
   items: Note[];
   setNotesList: Dispatch<SetStateAction<Note[]>>;
+  setTagsList: Dispatch<SetStateAction<string[]>>;
   filter: string;
   t: TFunction<"translation", undefined>;
 };

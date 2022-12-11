@@ -52,6 +52,7 @@ function App() {
             <CardsList
               items={notesList}
               setNotesList={setNotesList}
+              setTagsList={setTagsList}
               filter={filter}
               t={t}
             ></CardsList>

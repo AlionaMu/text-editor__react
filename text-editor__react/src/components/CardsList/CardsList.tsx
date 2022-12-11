@@ -18,6 +18,7 @@ export const CardsList = (props: CardsListPropsType) => {
               note={note}
               key={note.key}
               setNotesList={props.setNotesList}
+              setTagsList={props.setTagsList}
               t={t}
             ></Card>
           );
