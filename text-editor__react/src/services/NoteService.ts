@@ -10,6 +10,12 @@ export const NoteService = {
     return storage ? JSON.parse(storage) : notes;
   },
 
+  getNoteById(id: string) {
+    const data = this.getNotes();
+    const index = data.findIndex((item: Note) => item.id === id);
+    return data[index];
+  },
+
   setNotes(text: string, tags: string[]): void {
     const data = this.getNotes();
     const newNote: Note = {

@@ -1,5 +1,5 @@
 import { Highlight } from "@material-ui/icons";
-import { FormEvent, useCallback, useState } from "react";
+import { FormEvent, MouseEventHandler, useCallback, useState } from "react";
 import { HashService } from "../../services/HashService";
 import { NoteService } from "../../services/NoteService";
 import { TagService } from "../../services/TagService";
@@ -53,8 +53,20 @@ export const Card = (props: CardPropsType) => {
   //   : "";
 
   // const Component = TitleComponent as React.ElementType;
+
+  const setNoteNotEditable = () => {
+    setButton(Ebutton.Edit);
+    setEditMode(false);
+    setInputValue(props.note.text);
+  };
+
+  const clickNoteHandler = (e: any) => {
+    if (isEditMode && e.target.className === "tags-list_card")
+      setNoteNotEditable();
+  };
+
   return (
-    <div className="note-card">
+    <div className="note-card" onClick={(e: any) => clickNoteHandler(e)}>
       {!isEditMode ? (
         <div className="note-card__title">{inputValue}</div>
       ) : (
