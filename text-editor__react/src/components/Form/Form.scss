@@ -1,4 +1,4 @@
-@import "../../assets/colors.scss";
+@import "../../assets/theme-variables.scss";
 
 .form {
   display: flex;
@@ -9,7 +9,9 @@
   padding: 20px;
   margin: 10px 5px;
   border-radius: 9px;
-  background-color: $bg-color;
+  @include themify($themes) {
+    background: themed("new-note");
+  }
 
   &__button {
     height: 30px;
@@ -26,4 +28,8 @@
   &__error {
     color: red;
   }
+}
+
+.form > * {
+  margin: 3px;
 }

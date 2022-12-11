@@ -1,4 +1,4 @@
-@import "../../assets//colors.scss";
+@import "../../assets/theme-variables.scss";
 
 .tags-list_card {
   width: auto;
@@ -7,7 +7,9 @@
   padding: 20px;
   margin: 10px 5px;
   border-radius: 9px;
-  background-color: $bg-color;
   flex-wrap: wrap;
   list-style: none;
+  @include themify($themes) {
+    background: themed("note-color");
+  }
 }

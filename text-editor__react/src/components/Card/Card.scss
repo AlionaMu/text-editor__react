@@ -1,4 +1,4 @@
-@import "../../assets/colors.scss";
+@import "../../assets/theme-variables.scss";
 
 .note-card {
   display: flex;
@@ -6,9 +6,13 @@
   width: 300px;
   justify-content: space-around;
   padding: 20px;
-  margin: 10px 5px;
+  margin: 10px;
   border-radius: 9px;
-  background-color: #e5e5e5;
+  box-shadow: 0px 3px 5px rgb(0 0 0 / 20%), 0px 1px 18px rgb(0 0 0 / 12%),
+    0px 6px 10px rgb(0 0 0 / 14%);
+  @include themify($themes) {
+    background: themed("note-color");
+  }
 
   &__title {
     word-break: break-word;
@@ -24,7 +28,9 @@
   &__button {
     width: 90px;
     height: 25px;
-    background-color: $button-color;
+    @include themify($themes) {
+      background: themed("button-color");
+    }
   }
 
   &__button-container {

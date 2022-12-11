@@ -1,7 +1,9 @@
-@import "../../assets//colors.scss";
+@import "../../assets/theme-variables.scss";
 
 .tags-list__wrapper {
-  background-color: $bg-color;
+  @include themify($themes) {
+    background: themed("bg-color");
+  }
   padding: 10px;
   border-radius: 9px;
 }
@@ -14,7 +16,7 @@
 
 .tags-list {
   display: flex;
-  width: 280px;
+  width: 270px;
   justify-content: space-around;
   margin: 10px 5px;
   flex-wrap: wrap;

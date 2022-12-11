@@ -65,7 +65,7 @@ export const Card = (props: CardPropsType) => {
           {button}
         </button>
         <button className="button note-card__button" onClick={deleteNote}>
-          delete
+          {props.t("note.delete")}
         </button>
       </div>
     </div>

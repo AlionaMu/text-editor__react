@@ -7,5 +7,14 @@
     "placeholder": "Enter text",
     "button": "Submit",
     "error": "Note is required"
+  },
+  "tagsList": {
+    "title": "Tags",
+    "button": "Reset filter"
+  },
+  "note": {
+    "edit": "edit",
+    "delete": "delete",
+    "save": "save"
   }
 }

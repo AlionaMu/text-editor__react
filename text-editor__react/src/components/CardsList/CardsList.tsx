@@ -1,6 +1,7 @@
 import { CardsListPropsType, Note } from "../../types";
-import "./CardsList";
+import "./CardsList.scss";
 import { Card } from "../Card/Card";
+import { t } from "i18next";
 
 export const CardsList = (props: CardsListPropsType) => {
   const res = props.filter.length
@@ -17,6 +18,7 @@ export const CardsList = (props: CardsListPropsType) => {
               note={note}
               key={note.key}
               setNotesList={props.setNotesList}
+              t={t}
             ></Card>
           );
         })

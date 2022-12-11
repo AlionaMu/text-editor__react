@@ -2,23 +2,30 @@ import ModeNightIcon from "@mui/icons-material/ModeNight";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import "./ThemeSwitcher.scss";
 
+import { useContext } from "react";
+import { ThemeContext } from "../../context/theme-context";
+
 export const ThemeSwitcher = () => {
-  const handleThemeClick = (str: string) => {
-    console.log(str);
+  const { theme, setTheme } = useContext(ThemeContext);
+  const handleThemeChange = () => {
+    const isCurrentDark = theme === "dark";
+    setTheme(isCurrentDark ? "light" : "dark");
+
+    localStorage.setItem("theme", isCurrentDark ? "light" : "dark");
   };
 
   return (
     <div className="theme-switcher__wrapper" aria-label="Theme toggle">
       <button
         className="button_theme button_theme-light"
-        onClick={() => handleThemeClick("light")}
+        onClick={handleThemeChange}
       >
         <WbSunnyIcon></WbSunnyIcon>
       </button>
       <span className="theme-switcher__line">|</span>
       <button
         className="button_theme button_theme-dark"
-        onClick={() => handleThemeClick("dark")}
+        onClick={handleThemeChange}
       >
         <ModeNightIcon></ModeNightIcon>
       </button>

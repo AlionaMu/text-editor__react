@@ -26,7 +26,7 @@ export default function TagsList(props: TagsListPropsType) {
 
   return (
     <div className="tags-list__wrapper">
-      <p className="tags-list__title">Tags: </p>
+      <p className="tags-list__title"> {props.t("tagsList.title")} </p>
       <ul className="tags-list tags-list_common">
         {props.items ? (
           props.items.map((data: string) => {
@@ -48,7 +48,7 @@ export default function TagsList(props: TagsListPropsType) {
         )}
       </ul>
       <button className="button tags-list__button" onClick={resetFilter}>
-        reset filtering by tag
+        {props.t("tagsList.button")}
       </button>
     </div>
   );
