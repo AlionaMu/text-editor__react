@@ -1,11 +1,9 @@
-import { Highlight } from "@material-ui/icons";
-import { FormEvent, MouseEventHandler, useCallback, useState } from "react";
+import { useState } from "react";
 import { HashService } from "../../services/HashService";
 import { NoteService } from "../../services/NoteService";
 import { TagService } from "../../services/TagService";
 import { CardPropsType } from "../../types";
 import CardTagsList from "../CardTagsList/CardTagsList";
-import { Input } from "../HighlightInput/HighlightInput";
 import "./Card.scss";
 
 export enum Ebutton {
@@ -38,21 +36,9 @@ export const Card = (props: CardPropsType) => {
     NoteService.deleteNote(props.note.id);
     const allNotes = NoteService.getNotes();
     props.setNotesList(allNotes);
+    const commonTags = TagService.getAllTags();
+    props.setTagsList(commonTags);
   };
-
-  const onChangeHandler = (e: FormEvent<HTMLDivElement>) => {
-    // setInputValue(e.target.value);
-    // {light(inputValue)})}
-    console.log("e", e, "e.target", e.target);
-  };
-
-  // const value: any = inputValue
-  //   ? inputValue.split(" ").map((s: string) => {
-  //       s.split("")[0] === "#" ? <span className="highlight">{s}</span> : s;
-  //     })
-  //   : "";
-
-  // const Component = TitleComponent as React.ElementType;
 
   const setNoteNotEditable = () => {
     setButton(Ebutton.Edit);
@@ -60,13 +46,17 @@ export const Card = (props: CardPropsType) => {
     setInputValue(props.note.text);
   };
 
-  const clickNoteHandler = (e: any) => {
-    if (isEditMode && e.target.className === "tags-list_card")
+  const clickNoteHandler = (e: React.MouseEvent) => {
+    const target = e.target as HTMLInputElement;
+    if (isEditMode && target.className === "tags-list_card")
       setNoteNotEditable();
   };
 
   return (
-    <div className="note-card" onClick={(e: any) => clickNoteHandler(e)}>
+    <div
+      className="note-card"
+      onClick={(e: React.MouseEvent) => clickNoteHandler(e)}
+    >
       {!isEditMode ? (
         <div className="note-card__title">{inputValue}</div>
       ) : (
@@ -90,9 +80,3 @@ export const Card = (props: CardPropsType) => {
     </div>
   );
 };
-
-{
-  /* <div contentEditable="true" onChange={(e) => onChangeHandler(e)}>
-{light(inputValue)}
-</div> */
-}

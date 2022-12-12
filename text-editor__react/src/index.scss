@@ -9,19 +9,22 @@
   padding: 0;
 }
 
+.root {
+  min-width: 100vw;
+}
+
 body {
   font-family: "Roboto", sans-serif;
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
   @include themify($themes) {
     color: themed("font-color");
   }
 }
 
 .App > * {
-  width: 98vw;
   @include themify($themes) {
     color: themed("font-color");
   }
@@ -70,6 +73,8 @@ body {
   padding: 20px 5vw;
   display: flex;
   justify-content: space-around;
+  align-items: flex-start;
+  min-height: calc(100vh - 100px);
   @include smart {
     height: auto;
     flex-direction: column;

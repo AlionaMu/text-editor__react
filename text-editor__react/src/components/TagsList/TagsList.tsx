@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import { TagsListPropsType } from "../../types";
 import { TagService } from "../../services/TagService";
+import { NoteService } from "../../services/NoteService";
 
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
@@ -14,6 +15,8 @@ export default function TagsList(props: TagsListPropsType) {
       tagsList.filter((item: string) => item !== tagToDelete)
     );
     TagService.deleteTagFromStorage(tagToDelete);
+    NoteService.deleteNotesByTag(tagToDelete);
+    props.setNotesList(NoteService.getNotes);
   };
 
   const clickHandler = (data: string) => {

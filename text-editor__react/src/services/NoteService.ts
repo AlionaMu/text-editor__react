@@ -48,4 +48,21 @@ export const NoteService = {
     localStorage.setItem("notes", "");
     localStorage.setItem("notes", JSON.stringify(res));
   },
+
+  deleteNotesByTag(tag: string) {
+    const data = this.getNotes();
+    const res = data.filter((item: Note) =>
+      item.tags.includes(tag) ? 0 : item
+    );
+    localStorage.setItem("notes", "");
+    localStorage.setItem("notes", JSON.stringify(res));
+  },
+
+  searchTag(tag: string, id: string) {
+    const data = this.getNotes();
+    const res = data.filter((item: Note) => {
+      item.tags.includes(tag) && item.id !== id ? item : 0;
+    });
+    return res;
+  },
 };

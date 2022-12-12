@@ -45,6 +45,7 @@ function App() {
               <TagsList
                 items={tagsList}
                 setTagsList={setTagsList}
+                setNotesList={setNotesList}
                 setFilter={setFilter}
                 t={t}
               ></TagsList>
