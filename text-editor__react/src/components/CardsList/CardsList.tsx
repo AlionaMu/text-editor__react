@@ -4,6 +4,7 @@ import { Card } from "../Card/Card";
 import { t } from "i18next";
 
 export const CardsList = (props: CardsListPropsType) => {
+  console.log(props.list);
   const res = props.filter.length
     ? props.items.filter((item: Note) =>
         item.tags.includes(props.filter) ? item : 0
@@ -11,8 +12,8 @@ export const CardsList = (props: CardsListPropsType) => {
     : props.items;
   return (
     <section className="cards-list">
-      {res ? (
-        res.map((note: Note) => {
+      {props.list ? (
+        props.list.map((note: Note) => {
           return (
             <Card
               note={note}

@@ -8,6 +8,8 @@ import { TagService } from "./services/TagService";
 import { NoteService } from "./services/NoteService";
 
 import { ThemeContext } from "./context/theme-context";
+import { useSelector } from "react-redux";
+import { RootState } from "./store";
 
 function App() {
   const isBrowserDefaultDark = () =>
@@ -29,6 +31,8 @@ function App() {
   const notesStorageList = NoteService.getNotes();
   const [notesList, setNotesList] = useState(notesStorageList);
   const [filter, setFilter] = useState("");
+
+  const notes = useSelector((state: RootState) => state.notesList);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
@@ -55,6 +59,7 @@ function App() {
               setNotesList={setNotesList}
               setTagsList={setTagsList}
               filter={filter}
+              list={notes.notesList}
               t={t}
             ></CardsList>
           </main>

@@ -1,5 +1,6 @@
 import { TFunction } from "i18next";
 import { Dispatch, SetStateAction } from "react";
+import { FormInfo } from "../components/Form/Form";
 
 export enum LangEnum {
   en = "EN",
@@ -63,4 +64,5 @@ export type CardsListPropsType = {
   setTagsList: Dispatch<SetStateAction<string[]>>;
   filter: string;
   t: TFunction<"translation", undefined>;
+  list: Note[];
 };

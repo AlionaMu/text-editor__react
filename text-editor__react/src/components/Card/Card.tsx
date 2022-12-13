@@ -1,23 +1,30 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { HashService } from "../../services/HashService";
 import { NoteService } from "../../services/NoteService";
 import { TagService } from "../../services/TagService";
 import { CardPropsType } from "../../types";
 import CardTagsList from "../CardTagsList/CardTagsList";
+import { remove, setEditMode } from "../../store/notesListSlice";
 import "./Card.scss";
+import { RootState } from "../../store";
 
 export enum Ebutton {
   Edit = "edit",
   Save = "save",
 }
 
+const isEditMode = useSelector((state: RootState) => state.notesList);
+
 export const Card = (props: CardPropsType) => {
-  const [isEditMode, setEditMode] = useState(false);
+  const dispatch = useDispatch();
+  // const [isEditMode, setEditMode] = useState(false);
   const [inputValue, setInputValue] = useState(props.note.text);
   const [button, setButton] = useState(Ebutton.Edit);
 
   const switchClick = (id: string, inputValue: string) => {
-    setEditMode(true);
+    // setEditMode(true);
+    dispatch(setEditMode());
     if (button === Ebutton.Edit) {
       setButton(Ebutton.Save);
     } else {
@@ -28,21 +35,22 @@ export const Card = (props: CardPropsType) => {
 
       NoteService.editNote(inputValue, id);
       setButton(Ebutton.Edit);
-      setEditMode(false);
+      dispatch(setEditMode());
     }
   };
 
   const deleteNote = () => {
-    NoteService.deleteNote(props.note.id);
-    const allNotes = NoteService.getNotes();
-    props.setNotesList(allNotes);
-    const commonTags = TagService.getAllTags();
-    props.setTagsList(commonTags);
+    dispatch(remove(props.note.id));
+    // NoteService.deleteNote(props.note.id);
+    // const allNotes = NoteService.getNotes();
+    // props.setNotesList(allNotes);
+    // const commonTags = TagService.getAllTags();
+    // props.setTagsList(commonTags);
   };
 
   const setNoteNotEditable = () => {
     setButton(Ebutton.Edit);
-    setEditMode(false);
+    dispatch(setEditMode());
     setInputValue(props.note.text);
   };
 
