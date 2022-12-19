@@ -32,7 +32,7 @@ function App() {
   const [notesList, setNotesList] = useState(notesStorageList);
   const [filter, setFilter] = useState("");
 
-  const notes = useSelector((state: RootState) => state.notesList);
+  const state = useSelector((state: RootState) => state.notesList);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
@@ -47,7 +47,7 @@ function App() {
                 setNotesList={setNotesList}
               ></Form>
               <TagsList
-                items={tagsList}
+                items={state.tags}
                 setTagsList={setTagsList}
                 setNotesList={setNotesList}
                 setFilter={setFilter}
@@ -59,7 +59,7 @@ function App() {
               setNotesList={setNotesList}
               setTagsList={setTagsList}
               filter={filter}
-              list={notes.notesList}
+              list={state.notesList}
               t={t}
             ></CardsList>
           </main>

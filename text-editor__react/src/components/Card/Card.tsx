@@ -5,7 +5,7 @@ import { NoteService } from "../../services/NoteService";
 import { TagService } from "../../services/TagService";
 import { CardPropsType } from "../../types";
 import CardTagsList from "../CardTagsList/CardTagsList";
-import { remove, setEditMode } from "../../store/notesListSlice";
+import { editNote, remove, toggleEditMode } from "../../store/notesListSlice";
 import "./Card.scss";
 import { RootState } from "../../store";
 
@@ -14,28 +14,32 @@ export enum Ebutton {
   Save = "save",
 }
 
-const isEditMode = useSelector((state: RootState) => state.notesList);
-
 export const Card = (props: CardPropsType) => {
+  const notesList = useSelector((state: RootState) => state.notesList);
+  const index = NoteService.findIndex(props.note.id, notesList.notesList);
+
+  const isEditMode = notesList.notesList[index].isEditMode;
   const dispatch = useDispatch();
   // const [isEditMode, setEditMode] = useState(false);
   const [inputValue, setInputValue] = useState(props.note.text);
   const [button, setButton] = useState(Ebutton.Edit);
 
-  const switchClick = (id: string, inputValue: string) => {
+  const switchClick = (/*id: string, inputValue: string*/) => {
     // setEditMode(true);
-    dispatch(setEditMode());
+
     if (button === Ebutton.Edit) {
       setButton(Ebutton.Save);
+      dispatch(toggleEditMode(props.note.id));
     } else {
-      const tags = HashService.findByHash(inputValue);
-      TagService.setNewTagToStorage(tags);
-      const commonTags = TagService.getAllTags();
-      props.setTagsList(commonTags);
+      // const tags = HashService.findByHash(inputValue);
+      // TagService.setNewTagToStorage(tags);
+      // const commonTags = TagService.getAllTags();
+      // props.setTagsList(commonTags);
 
-      NoteService.editNote(inputValue, id);
+      // NoteService.editNote(inputValue, id);
+      dispatch(editNote({ id: props.note.id, text: inputValue }));
       setButton(Ebutton.Edit);
-      dispatch(setEditMode());
+      dispatch(toggleEditMode(props.note.id));
     }
   };
 
@@ -50,8 +54,8 @@ export const Card = (props: CardPropsType) => {
 
   const setNoteNotEditable = () => {
     setButton(Ebutton.Edit);
-    dispatch(setEditMode());
-    setInputValue(props.note.text);
+    dispatch(toggleEditMode(props.note.id));
+    //  setInputValue(props.note.text);          !!!!!!!!!!!!!!!
   };
 
   const clickNoteHandler = (e: React.MouseEvent) => {
@@ -77,7 +81,7 @@ export const Card = (props: CardPropsType) => {
       <div className="note-card__button-container">
         <button
           className="button note-card__button"
-          onClick={() => switchClick(props.note.id, inputValue)}
+          onClick={() => switchClick(/*props.note.id, inputValue*/)}
         >
           {button}
         </button>

@@ -18,14 +18,14 @@ export const NoteService = {
 
   setNotes(text: string, tags: string[]): void {
     const data = this.getNotes();
-    const newNote: Note = {
-      id: (text.length + Math.random()).toString(),
-      key: (Date.now() + Math.random()).toString(),
-      text: text,
-      tags: tags,
-    };
-    data.push(newNote);
-    localStorage.setItem("notes", JSON.stringify(data));
+    // const newNote: Note = {
+    //   id: (text.length + Math.random()).toString(),
+    //   key: (Date.now() + Math.random()).toString(),
+    //   text: text,
+    //   tags: tags,
+    // };
+    // data.push(newNote);
+    // localStorage.setItem("notes", JSON.stringify(data));
   },
 
   editNote(text: string, id: string) {
@@ -64,5 +64,10 @@ export const NoteService = {
       item.tags.includes(tag) && item.id !== id ? item : 0;
     });
     return res;
+  },
+
+  findIndex(id: string, data: Note[]) {
+    const index = data.findIndex((item: Note) => item.id === id);
+    return index;
   },
 };

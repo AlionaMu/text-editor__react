@@ -17,7 +17,6 @@ export const TagService = {
     const result = [...new Set(tags)];
     return result;
   },
-
   deleteTagFromStorage(name: string): void {
     const data = this.getAllTags();
     const res = data.filter((item: string) => item !== name);

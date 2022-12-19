@@ -40,6 +40,7 @@ export type Note = {
   key: string;
   text: string;
   tags: string[];
+  isEditMode: boolean;
 };
 
 export type Tag = {
@@ -65,4 +66,13 @@ export type CardsListPropsType = {
   filter: string;
   t: TFunction<"translation", undefined>;
   list: Note[];
+};
+
+export type CardEditType = {
+  text: string;
+  id: string;
+};
+
+export type AddTagsType = {
+  text: string[];
 };

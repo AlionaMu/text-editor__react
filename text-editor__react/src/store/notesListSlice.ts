@@ -1,4 +1,6 @@
-import { FormInfo } from "../components/Form/Form";
+import { TagService } from "./../services/TagService";
+import { NoteService } from "./../services/NoteService";
+import { CardEditType } from "./../types/index";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Note } from "../types";
 
@@ -9,7 +11,6 @@ const initialState = {
   notesList: arr,
   tags: tagsArr,
   filter: arr,
-  editMode: false,
 };
 
 export const notesListSlice = createSlice({
@@ -24,12 +25,25 @@ export const notesListSlice = createSlice({
         (item) => item.id !== action.payload
       );
     },
-    setEditMode: (state) => {
-      state.editMode != state.editMode;
+    toggleEditMode: (state, action: PayloadAction<string>) => {
+      const index = NoteService.findIndex(action.payload, state.notesList);
+      state.notesList[index].isEditMode = !state.notesList[index].isEditMode;
+    },
+    editNote: (state, action: PayloadAction<CardEditType>) => {
+      const index = NoteService.findIndex(action.payload.id, state.notesList);
+      state.notesList[index].text = action.payload.text;
+    },
+    addTags: (state, action: PayloadAction<string[]>) => {
+      state.tags.push(...action.payload);
+      state.tags = TagService.setUniqueList(state.tags);
+    },
+    deleteTag: (state, action: PayloadAction<string>) => {
+      state.tags = state.tags.filter((item: string) => item !== action.payload);
     },
   },
 });
 
-export const { create, remove, setEditMode } = notesListSlice.actions;
+export const { create, remove, toggleEditMode, editNote, addTags, deleteTag } =
+  notesListSlice.actions;
 
 export default notesListSlice.reducer;
