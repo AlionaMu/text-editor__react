@@ -15,6 +15,12 @@
     background: themed("new-note");
   }
 
+  &__label {
+    @include themify($themes) {
+      color: themed("label-font");
+    }
+  }
+
   &__button {
     height: 30px;
     width: 100px;

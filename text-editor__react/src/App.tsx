@@ -4,9 +4,6 @@ import { Header } from "./components/Header/Header";
 import TagsList from "./components/TagsList/TagsList";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { TagService } from "./services/TagService";
-import { NoteService } from "./services/NoteService";
-
 import { ThemeContext } from "./context/theme-context";
 import { useSelector } from "react-redux";
 import { RootState } from "./store";
@@ -26,10 +23,6 @@ function App() {
     i18n.changeLanguage(language);
   };
 
-  const list = TagService.getAllTags();
-  const [tagsList, setTagsList] = useState(list);
-  const notesStorageList = NoteService.getNotes();
-  const [notesList, setNotesList] = useState(notesStorageList);
   const [filter, setFilter] = useState("");
 
   const state = useSelector((state: RootState) => state.notesList);
@@ -41,27 +34,14 @@ function App() {
           <Header changeLanguage={changeLanguage} t={t}></Header>
           <main className="main">
             <section className="container">
-              <Form
-                t={t}
-                setTagsList={setTagsList}
-                setNotesList={setNotesList}
-              ></Form>
+              <Form t={t}></Form>
               <TagsList
                 items={state.tags}
-                setTagsList={setTagsList}
-                setNotesList={setNotesList}
                 setFilter={setFilter}
                 t={t}
               ></TagsList>
             </section>
-            <CardsList
-              items={notesList}
-              setNotesList={setNotesList}
-              setTagsList={setTagsList}
-              filter={filter}
-              list={state.notesList}
-              t={t}
-            ></CardsList>
+            <CardsList filter={filter} list={state.notesList} t={t}></CardsList>
           </main>
         </div>
       </div>

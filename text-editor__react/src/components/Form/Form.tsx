@@ -36,13 +36,9 @@ export const Form = (props: FormPropsType) => {
     dispatch(create(newNote));
   };
 
-  const addCommonTags = (tags: string[]) => {
-    dispatch(addTags(tags));
-  };
-
   const onSubmit: SubmitHandler<FormInfo> = (data) => {
     const tags = HashService.findByHash(data.note);
-    addCommonTags(tags);
+    dispatch(addTags(tags));
     createNote(data.note, tags);
   };
 
@@ -55,7 +51,7 @@ export const Form = (props: FormPropsType) => {
       onSubmit={handleSubmit(onSubmit)}
       onChange={setButtonAble}
     >
-      <label>{props.t("form.title")}:</label>
+      <label className="form__label">{props.t("form.title")}:</label>
       <input
         type="text"
         {...register("note", {

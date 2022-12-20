@@ -19,14 +19,18 @@ export const ThemeSwitcher = () => {
         className="button_theme button_theme-light"
         onClick={handleThemeChange}
       >
-        <WbSunnyIcon></WbSunnyIcon>
+        <WbSunnyIcon
+          color={theme === "dark" ? "disabled" : "success"}
+        ></WbSunnyIcon>
       </button>
       <span className="theme-switcher__line">|</span>
       <button
         className="button_theme button_theme-dark"
         onClick={handleThemeChange}
       >
-        <ModeNightIcon></ModeNightIcon>
+        <ModeNightIcon
+          color={theme === "dark" ? "success" : "disabled"}
+        ></ModeNightIcon>
       </button>
     </div>
   );

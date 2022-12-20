@@ -1,6 +1,5 @@
 import { TFunction } from "i18next";
 import { Dispatch, SetStateAction } from "react";
-import { FormInfo } from "../components/Form/Form";
 
 export enum LangEnum {
   en = "EN",
@@ -23,15 +22,11 @@ export type LocalType = {
 
 export type FormPropsType = {
   t: TFunction<"translation", undefined>;
-  setTagsList: Dispatch<SetStateAction<string[]>>;
-  setNotesList: Dispatch<SetStateAction<Note[]>>;
 };
 
 export type CardPropsType = {
   note: Note;
   key: string;
-  setNotesList: Dispatch<SetStateAction<Note[]>>;
-  setTagsList: Dispatch<SetStateAction<string[]>>;
   t: TFunction<"translation", undefined>;
 };
 
@@ -45,12 +40,11 @@ export type Note = {
 
 export type Tag = {
   tag: string;
+  sum: number;
 };
 
 export type TagsListPropsType = {
   items: string[];
-  setTagsList: Dispatch<SetStateAction<string[]>>;
-  setNotesList: Dispatch<SetStateAction<Note[]>>;
   setFilter: Dispatch<SetStateAction<string>>;
   t: TFunction<"translation", undefined>;
 };
@@ -60,9 +54,6 @@ export type CardTagsListPropsType = {
 };
 
 export type CardsListPropsType = {
-  items: Note[];
-  setNotesList: Dispatch<SetStateAction<Note[]>>;
-  setTagsList: Dispatch<SetStateAction<string[]>>;
   filter: string;
   t: TFunction<"translation", undefined>;
   list: Note[];
@@ -71,6 +62,7 @@ export type CardsListPropsType = {
 export type CardEditType = {
   text: string;
   id: string;
+  tags: string[];
 };
 
 export type AddTagsType = {

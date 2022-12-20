@@ -2,8 +2,6 @@ import "./TagsList.scss";
 import { styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import { TagsListPropsType } from "../../types";
-import { TagService } from "../../services/TagService";
-import { NoteService } from "../../services/NoteService";
 import { useDispatch } from "react-redux";
 import { deleteTag } from "../../store/notesListSlice";
 
@@ -15,12 +13,6 @@ export default function TagsList(props: TagsListPropsType) {
   const dispatch = useDispatch();
   const handleDelete = (tagToDelete: string) => () => {
     dispatch(deleteTag(tagToDelete));
-    // props.setTagsList((tagsList: string[]) =>
-    //   tagsList.filter((item: string) => item !== tagToDelete)
-    // );
-    // TagService.deleteTagFromStorage(tagToDelete);
-    // NoteService.deleteNotesByTag(tagToDelete);
-    // props.setNotesList(NoteService.getNotes);
   };
 
   const clickHandler = (data: string) => {

@@ -32,6 +32,7 @@ export const notesListSlice = createSlice({
     editNote: (state, action: PayloadAction<CardEditType>) => {
       const index = NoteService.findIndex(action.payload.id, state.notesList);
       state.notesList[index].text = action.payload.text;
+      state.notesList[index].tags = action.payload.tags;
     },
     addTags: (state, action: PayloadAction<string[]>) => {
       state.tags.push(...action.payload);

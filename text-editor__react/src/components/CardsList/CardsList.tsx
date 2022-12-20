@@ -13,15 +13,7 @@ export const CardsList = (props: CardsListPropsType) => {
     <section className="cards-list">
       {res ? (
         res.map((note: Note) => {
-          return (
-            <Card
-              note={note}
-              key={note.key}
-              setNotesList={props.setNotesList}
-              setTagsList={props.setTagsList}
-              t={t}
-            ></Card>
-          );
+          return <Card note={note} key={note.key} t={t}></Card>;
         })
       ) : (
         <div>NO CARDS</div>

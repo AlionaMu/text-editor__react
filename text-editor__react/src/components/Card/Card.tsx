@@ -2,10 +2,14 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { HashService } from "../../services/HashService";
 import { NoteService } from "../../services/NoteService";
-import { TagService } from "../../services/TagService";
 import { CardPropsType } from "../../types";
 import CardTagsList from "../CardTagsList/CardTagsList";
-import { editNote, remove, toggleEditMode } from "../../store/notesListSlice";
+import {
+  addTags,
+  editNote,
+  remove,
+  toggleEditMode,
+} from "../../store/notesListSlice";
 import "./Card.scss";
 import { RootState } from "../../store";
 
@@ -20,24 +24,17 @@ export const Card = (props: CardPropsType) => {
 
   const isEditMode = notesList.notesList[index].isEditMode;
   const dispatch = useDispatch();
-  // const [isEditMode, setEditMode] = useState(false);
   const [inputValue, setInputValue] = useState(props.note.text);
   const [button, setButton] = useState(Ebutton.Edit);
 
-  const switchClick = (/*id: string, inputValue: string*/) => {
-    // setEditMode(true);
-
+  const switchClick = () => {
     if (button === Ebutton.Edit) {
       setButton(Ebutton.Save);
       dispatch(toggleEditMode(props.note.id));
     } else {
-      // const tags = HashService.findByHash(inputValue);
-      // TagService.setNewTagToStorage(tags);
-      // const commonTags = TagService.getAllTags();
-      // props.setTagsList(commonTags);
-
-      // NoteService.editNote(inputValue, id);
-      dispatch(editNote({ id: props.note.id, text: inputValue }));
+      const tags = HashService.findByHash(inputValue);
+      dispatch(editNote({ id: props.note.id, text: inputValue, tags: tags }));
+      dispatch(addTags(tags));
       setButton(Ebutton.Edit);
       dispatch(toggleEditMode(props.note.id));
     }
@@ -45,17 +42,11 @@ export const Card = (props: CardPropsType) => {
 
   const deleteNote = () => {
     dispatch(remove(props.note.id));
-    // NoteService.deleteNote(props.note.id);
-    // const allNotes = NoteService.getNotes();
-    // props.setNotesList(allNotes);
-    // const commonTags = TagService.getAllTags();
-    // props.setTagsList(commonTags);
   };
 
   const setNoteNotEditable = () => {
     setButton(Ebutton.Edit);
     dispatch(toggleEditMode(props.note.id));
-    //  setInputValue(props.note.text);          !!!!!!!!!!!!!!!
   };
 
   const clickNoteHandler = (e: React.MouseEvent) => {
@@ -81,7 +72,7 @@ export const Card = (props: CardPropsType) => {
       <div className="note-card__button-container">
         <button
           className="button note-card__button"
-          onClick={() => switchClick(/*props.note.id, inputValue*/)}
+          onClick={() => switchClick()}
         >
           {button}
         </button>
