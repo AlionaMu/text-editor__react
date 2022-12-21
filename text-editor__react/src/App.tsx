@@ -36,7 +36,7 @@ function App() {
             <section className="container">
               <Form t={t}></Form>
               <TagsList
-                items={state.tags}
+                items={state.tagsAmount}
                 setFilter={setFilter}
                 t={t}
               ></TagsList>

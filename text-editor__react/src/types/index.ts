@@ -44,7 +44,7 @@ export type Tag = {
 };
 
 export type TagsListPropsType = {
-  items: string[];
+  items: Tag[];
   setFilter: Dispatch<SetStateAction<string>>;
   t: TFunction<"translation", undefined>;
 };

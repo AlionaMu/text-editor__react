@@ -9,6 +9,7 @@ import {
   editNote,
   remove,
   setTags,
+  setTagsAmount,
   // setTagsAmount,
   toggleEditMode,
 } from "../../store/notesListSlice";
@@ -37,6 +38,7 @@ export const Card = (props: CardPropsType) => {
       const tags = HashService.findByHash(inputValue);
       dispatch(editNote({ id: props.note.id, text: inputValue, tags: tags }));
       dispatch(setTags());
+      dispatch(setTagsAmount());
       setButton(Ebutton.Edit);
       dispatch(toggleEditMode(props.note.id));
     }
@@ -45,6 +47,7 @@ export const Card = (props: CardPropsType) => {
   const deleteNote = () => {
     dispatch(remove(props.note.id));
     dispatch(setTags());
+    dispatch(setTagsAmount());
   };
 
   const setNoteNotEditable = () => {

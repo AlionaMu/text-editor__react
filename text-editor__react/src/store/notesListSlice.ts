@@ -43,19 +43,16 @@ export const notesListSlice = createSlice({
       const tagsArr: string[] = [];
       state.notesList.forEach((item) => tagsArr.push(...item.tags));
       state.tags = TagService.setUniqueList(tagsArr);
+      state.tagsAmount = [];
 
-      const objKeys = state.tagsAmount.map((item) => item.tag);
-      tagsArr.forEach((item: string) => {
-        const tagIndex = state.tagsAmount.findIndex((tag) => tag.tag === item);
-        if (objKeys.includes(item)) {
-          state.tagsAmount[+tagIndex].sum++;
-        } else {
-          const newTag: Tag = {
-            tag: item,
-            sum: 1,
-          };
-          state.tagsAmount.push(newTag);
-        }
+      state.tags.forEach((item: string) => {
+        let count = 0;
+        tagsArr.forEach((tag: string) => (tag === item ? count++ : 0));
+        const newTag: Tag = {
+          tag: item,
+          sum: count,
+        };
+        state.tagsAmount.push(newTag);
       });
     },
     setTags: (state) => {
@@ -71,7 +68,6 @@ export const {
   remove,
   toggleEditMode,
   editNote,
-  // addTags,
   deleteTag,
   setTagsAmount,
   setTags,

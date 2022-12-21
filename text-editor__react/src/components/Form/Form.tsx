@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import "./Form.scss";
 import { HashService } from "../../services/HashService";
 import { FormPropsType, Note } from "../../types";
-import { create, setTags } from "../../store/notesListSlice";
+import { create, setTags, setTagsAmount } from "../../store/notesListSlice";
 import { useDispatch } from "react-redux";
 
 export interface FormInfo {
@@ -40,6 +40,7 @@ export const Form = (props: FormPropsType) => {
     const tags = HashService.findByHash(data.note);
     createNote(data.note, tags);
     dispatch(setTags());
+    dispatch(setTagsAmount());
   };
 
   const setButtonAble = () => {
