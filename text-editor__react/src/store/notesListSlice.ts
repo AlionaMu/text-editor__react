@@ -1,15 +1,17 @@
 import { TagService } from "./../services/TagService";
 import { NoteService } from "./../services/NoteService";
-import { CardEditType } from "./../types/index";
+import { CardEditType, Tag } from "./../types/index";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Note } from "../types";
 
 const arr: Note[] = [];
 const tagsArr: string[] = [];
+const tagsAmountArr: Tag[] = [];
 
 const initialState = {
   notesList: arr,
   tags: tagsArr,
+  tagsAmount: tagsAmountArr,
   filter: arr,
 };
 
@@ -34,17 +36,45 @@ export const notesListSlice = createSlice({
       state.notesList[index].text = action.payload.text;
       state.notesList[index].tags = action.payload.tags;
     },
-    addTags: (state, action: PayloadAction<string[]>) => {
-      state.tags.push(...action.payload);
-      state.tags = TagService.setUniqueList(state.tags);
-    },
     deleteTag: (state, action: PayloadAction<string>) => {
       state.tags = state.tags.filter((item: string) => item !== action.payload);
+    },
+    setTagsAmount: (state) => {
+      const tagsArr: string[] = [];
+      state.notesList.forEach((item) => tagsArr.push(...item.tags));
+      state.tags = TagService.setUniqueList(tagsArr);
+
+      const objKeys = state.tagsAmount.map((item) => item.tag);
+      tagsArr.forEach((item: string) => {
+        const tagIndex = state.tagsAmount.findIndex((tag) => tag.tag === item);
+        if (objKeys.includes(item)) {
+          state.tagsAmount[+tagIndex].sum++;
+        } else {
+          const newTag: Tag = {
+            tag: item,
+            sum: 1,
+          };
+          state.tagsAmount.push(newTag);
+        }
+      });
+    },
+    setTags: (state) => {
+      const tagsArr: string[] = [];
+      state.notesList.forEach((item) => tagsArr.push(...item.tags));
+      state.tags = TagService.setUniqueList(tagsArr);
     },
   },
 });
 
-export const { create, remove, toggleEditMode, editNote, addTags, deleteTag } =
-  notesListSlice.actions;
+export const {
+  create,
+  remove,
+  toggleEditMode,
+  editNote,
+  // addTags,
+  deleteTag,
+  setTagsAmount,
+  setTags,
+} = notesListSlice.actions;
 
 export default notesListSlice.reducer;

@@ -5,9 +5,11 @@ import { NoteService } from "../../services/NoteService";
 import { CardPropsType } from "../../types";
 import CardTagsList from "../CardTagsList/CardTagsList";
 import {
-  addTags,
+  // addTags,
   editNote,
   remove,
+  setTags,
+  // setTagsAmount,
   toggleEditMode,
 } from "../../store/notesListSlice";
 import "./Card.scss";
@@ -34,7 +36,7 @@ export const Card = (props: CardPropsType) => {
     } else {
       const tags = HashService.findByHash(inputValue);
       dispatch(editNote({ id: props.note.id, text: inputValue, tags: tags }));
-      dispatch(addTags(tags));
+      dispatch(setTags());
       setButton(Ebutton.Edit);
       dispatch(toggleEditMode(props.note.id));
     }
@@ -42,6 +44,7 @@ export const Card = (props: CardPropsType) => {
 
   const deleteNote = () => {
     dispatch(remove(props.note.id));
+    dispatch(setTags());
   };
 
   const setNoteNotEditable = () => {
