@@ -74,7 +74,7 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 159px);
   @include smart {
     height: auto;
     flex-direction: column;

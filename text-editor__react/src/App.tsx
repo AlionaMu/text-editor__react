@@ -7,6 +7,7 @@ import { useState } from "react";
 import { ThemeContext } from "./context/theme-context";
 import { useSelector } from "react-redux";
 import { RootState } from "./store";
+import { Footer } from "./components/Footer/Footer";
 
 function App() {
   const isBrowserDefaultDark = () =>
@@ -43,6 +44,7 @@ function App() {
             </section>
             <CardsList filter={filter} list={state.notesList} t={t}></CardsList>
           </main>
+          <Footer></Footer>
         </div>
       </div>
     </ThemeContext.Provider>

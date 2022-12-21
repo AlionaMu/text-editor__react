@@ -9,4 +9,9 @@
     background: themed("header-color");
     color: themed("font-color");
   }
+
+  &__title:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
 }
